@@ -1,12 +1,17 @@
 package com.poscoict.jblog.controller;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.jblog.service.BlogService;
+import com.poscoict.jblog.service.FileUploadService;
 import com.poscoict.jblog.vo.BlogVo;
 
 @Controller
@@ -15,6 +20,12 @@ public class BlogController {
 	
 	@Autowired
 	private BlogService blogService;
+	
+	@Autowired
+	private FileUploadService fileUploadService;
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	@RequestMapping("")
 	public String blogmain(@PathVariable("id") String id, Model model, BlogVo blogVo ) {
@@ -39,6 +50,18 @@ public class BlogController {
 		return "blog/blog-admin-write";
 	}
 	
+	@RequestMapping("/main/update")
+	public String main(@PathVariable("id") String id, BlogVo blog, @RequestParam("logo-file") MultipartFile file) {
+		String logo = fileUploadService.restore(file);
+		
+		if(logo != null) {
+			blog.setLogo(logo);
+			blog.setUserId(id);
+		}
+		blogService.update(blog);
+		servletContext.setAttribute("blog", blog);
+		return "redirect:/"+ id;
+	}
 	
 
 }

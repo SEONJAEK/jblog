@@ -6,13 +6,13 @@
 	<insert id="insert" parameterType = "uservo" >
 		<![CDATA[
 			insert into blog
-			 values ('title', '/images/202214104539465.png', #{id})
+			 values ('title', '/images/20221602322119.JPG', #{id})
 		]]>
 	</insert>
 	
 	<update id="update" parameterType="blogvo">
 		<![CDATA[
-				update blog set title= #{title}, logo= #{logo} where user_id = #{id}
+				update blog set title= #{title}, logo= #{logo} where user_id = #{userId}
 		]]>
 	</update>
 	

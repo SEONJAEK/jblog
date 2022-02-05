@@ -17,4 +17,11 @@ public class BlogService {
 		return blogRepository.findById(id);
 	}
 
+	public boolean update(BlogVo blog) {
+		return blogRepository.update(blog) == 1; 
+		
+	}
+	
+
+
 }
