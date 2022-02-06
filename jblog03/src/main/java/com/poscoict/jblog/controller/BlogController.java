@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.poscoict.jblog.service.BlogService;
 import com.poscoict.jblog.service.FileUploadService;
 import com.poscoict.jblog.vo.BlogVo;
+import com.poscoict.jblog.vo.CategoryVo;
 
 @Controller
 @RequestMapping("/{id}")
@@ -23,7 +24,7 @@ public class BlogController {
 	
 	@Autowired
 	private FileUploadService fileUploadService;
-	
+	   
 	@Autowired
 	private ServletContext servletContext;
 	
@@ -42,6 +43,11 @@ public class BlogController {
 	
 	@RequestMapping("/admin/category")
 	public String blogcategory() {
+		return "blog/blog-admin-category";
+	}
+	
+	@RequestMapping("/admin/category/insert")
+	public String blogcategoryInsert(@PathVariable("id") String id, CategoryVo categoryVo) {
 		return "blog/blog-admin-category";
 	}
 	
