@@ -15,4 +15,10 @@
 			select no, name, description from category where blog_id = #{_parameter} order by no asc 
 		]]>
 	</select>
+	
+	<select id="postCntByCategory" parameterType = "Long" resultType="Long">
+		<![CDATA[
+				select count(*) from post where category_no=#{categoryNo}
+		]]>
+	</select>
 </mapper>

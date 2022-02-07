@@ -1,5 +1,6 @@
 package com.poscoict.jblog.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,18 @@ public class CategoryService {
 	
 	public Map<String, Object> select(String id){
 		HashMap<String, Object> map = new HashMap<>();
-		List<CategoryVo> clist = null;
-		clist = categoryRepository.findCategoryAll(id);
+		List<CategoryVo> clist = categoryRepository.findCategoryAll(id);
+		List<Long> noList = new ArrayList<>();
+		for(CategoryVo vo : clist) {
+			Long postCnt = categoryRepository.postCntByCategory(vo.getNo());
+			noList.add(postCnt);
+		}
 		map.put("clist", clist);
+		map.put("noList", noList);
 		return map;
 	}
+	
+//	public Long getPostCntByCategory(Long categoryNo) {
+//		return categoryRepository.postCntByCategory(categoryNo);
+//	}
 }

@@ -1,5 +1,6 @@
 package com.poscoict.jblog.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.jblog.service.BlogService;
+import com.poscoict.jblog.service.CategoryService;
 import com.poscoict.jblog.service.FileUploadService;
 import com.poscoict.jblog.service.PostService;
-import com.poscoict.jblog.service.CategoryService;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.CategoryVo;
 import com.poscoict.jblog.vo.PostVo;
-import com.poscoict.jblog.vo.UserVo;
 
 @Controller
 @RequestMapping("/{id:(?!images)(?!assets).*}") //asset을 !(제외하고) ?(있거나 말거나)
@@ -82,7 +82,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping("/admin/category")
-	public String blogcategory() {
+	public String blogcategory(@PathVariable("id") String id, Model model) {
+		Map<String, Object> map  = categoryService.select(id);
+		model.addAttribute("map",map);
 		return "blog/blog-admin-category";
 	}
 	

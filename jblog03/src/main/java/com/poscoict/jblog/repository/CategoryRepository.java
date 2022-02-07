@@ -22,4 +22,8 @@ public class CategoryRepository {
 	public List<CategoryVo> findCategoryAll(String id) {
 		return sqlSession.selectList("category.findCategoryAll", id);
 	}
+	
+	public Long postCntByCategory(Long categoryNo) {
+		return sqlSession.selectOne("category.postCntByCategory", categoryNo);
+	}
 }

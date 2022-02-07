@@ -25,30 +25,20 @@
 						<th>설명</th>
 						<th>삭제</th>
 					</tr>
-					<tr>
-						<td>3</td>
-						<td>미분류</td>
-						<td>10</td>
-						<td>카테고리를 지정하지 않은 경우</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
+					<c:forEach items="${map.clist}" var="vo" varStatus="status">
+                     <tr>
+                        <td>${map.clist.size()-status.index}</td>
+                        <td>${vo.name}</td>
+                        <td>${map.noList.get(status.index)}</td>
+                        <td>${vo.description}</td>
+                        <td>
+                           <c:if test = "${map.noList.get(status.index)==0}">
+                              <a href="${pageContext.servletContext.contextPath}/blog/${authUser.id}/delete/${vo.no}">
+                              <img src="${pageContext.servletContext.contextPath}/assets/images/delete.jpg"></a>
+                           </c:if>
+                        </td>
+                     </tr>
+                  </c:forEach>
 				</table>
 				<form action="${pageContext.request.contextPath }/${authUser.id}/admin/category/insert" method="post">
 					<h4 class="n-c">새로운 카테고리 추가</h4>
