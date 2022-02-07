@@ -26,4 +26,8 @@ public class CategoryRepository {
 	public Long postCntByCategory(Long categoryNo) {
 		return sqlSession.selectOne("category.postCntByCategory", categoryNo);
 	}
+
+	public int deleteCategory(Long no) {
+		return sqlSession.delete("category.deleteCategory", no);
+	}
 }

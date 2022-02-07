@@ -33,7 +33,7 @@
                         <td>${vo.description}</td>
                         <td>
                            <c:if test = "${map.noList.get(status.index)==0}">
-                              <a href="${pageContext.servletContext.contextPath}/blog/${authUser.id}/delete/${vo.no}">
+                              <a href="${pageContext.servletContext.contextPath}/${authUser.id}/admin/category/delete/${vo.no}">
                               <img src="${pageContext.servletContext.contextPath}/assets/images/delete.jpg"></a>
                            </c:if>
                         </td>

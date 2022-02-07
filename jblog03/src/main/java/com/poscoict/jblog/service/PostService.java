@@ -17,5 +17,6 @@ public class PostService {
 		return postRepository.insert(postvo);
 		
 	}
+
 	
 }

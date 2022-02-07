@@ -66,15 +66,6 @@ public class BlogController {
 			model.addAttribute("blogVo", blogVo);
 			return "blog/blog-main";
 		}
-		
-	
-//	@RequestMapping("")
-//	public String blogmain(@PathVariable("id") String id, Model model, BlogVo blogVo ) {
-//		//위치 매핑만 해줘
-//		BlogVo blogvo = blogService.getInfo(id);
-//		model.addAttribute("blogVo", blogVo);
-//		return "blog/blog-main";
-//	}
 	
 	@RequestMapping("/admin/basic")
 	public String blogbasic() {
@@ -86,12 +77,6 @@ public class BlogController {
 		Map<String, Object> map  = categoryService.select(id);
 		model.addAttribute("map",map);
 		return "blog/blog-admin-category";
-	}
-	
-	@RequestMapping(value = "/admin/category/insert", method = RequestMethod.POST)
-	public String blogcategoryInsert(@PathVariable("id") String id, CategoryVo categoryVo) {
-		categoryService.insertCategory(categoryVo);//categoryVo를 어디에서 세팅해주는지?
-		return "redirect:/{id}";
 	}
 	
 	
@@ -116,12 +101,26 @@ public class BlogController {
 		return "redirect:/"+ id;
 	}
 	
+	@RequestMapping(value = "/admin/category/insert", method = RequestMethod.POST)
+	public String blogcategoryInsert(@PathVariable("id") String id, CategoryVo categoryVo) {
+		categoryService.insertCategory(categoryVo);//categoryVo를 어디에서 세팅해주는지?
+		return "redirect:/{id}/admin/category";
+	}
+	
+	@RequestMapping(value = "/admin/category/delete/{no}", method = RequestMethod.GET)
+	public String blogCategoryDelete(@PathVariable("id") String id,@PathVariable("no") Long no ) {
+		categoryService.deleteCategory(no);
+		return "redirect:/{id}/admin/category";
+	}
+	
 	@RequestMapping(value = "/admin/post/insert", method = RequestMethod.POST)
 	public String blogPostInsert(@PathVariable("id") String id, PostVo postvo) {
 		postService.insertPost(postvo);
 		return "redirect:/{id}";
 	}
 	
-
+	
 	
 }
+
+

@@ -18,7 +18,13 @@
 	
 	<select id="postCntByCategory" parameterType = "Long" resultType="Long">
 		<![CDATA[
-				select count(*) from post where category_no=#{categoryNo}
+			select count(*) from post where category_no = #{categoryNo}
 		]]>
 	</select>
+	
+	<delete id="deleteCategory" parameterType ="Long">
+		<![CDATA[
+			delete from category where no = #{no} 
+		]]>
+	</delete>
 </mapper>

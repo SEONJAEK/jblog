@@ -32,6 +32,12 @@ public class CategoryService {
 		map.put("noList", noList);
 		return map;
 	}
+
+	public boolean deleteCategory(Long no) {
+		return categoryRepository.deleteCategory(no) == 1;
+	}
+
+	
 	
 //	public Long getPostCntByCategory(Long categoryNo) {
 //		return categoryRepository.postCntByCategory(categoryNo);
