@@ -61,9 +61,11 @@ public class BlogController {
 			}else if(pathNo1.isPresent()) {
 				categoryNo = pathNo1.get();
 			}
-			
+			servletContext.setAttribute("blogvo", blogService.getInfo(id));
 			BlogVo blogvo = blogService.getInfo(id);
 			model.addAttribute("blogVo", blogVo);
+			Map<String, Object> map = categoryService.select(id);
+			model.addAttribute("map", map);
 			return "blog/blog-main";
 		}
 	
