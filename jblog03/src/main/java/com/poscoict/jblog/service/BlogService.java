@@ -19,9 +19,6 @@ public class BlogService {
 
 	public boolean update(BlogVo blog) {
 		return blogRepository.update(blog) == 1; 
-		
 	}
 	
-
-
 }

@@ -9,4 +9,10 @@
 			 values (null, #{name}, #{description}, #{blogId})
 		]]>
 	</insert>
+	
+	<select id="findCategoryAll" parameterType = "String" resultType="categoryvo">
+		<![CDATA[
+			select no, name, description from category where blog_id = #{_parameter} order by no asc 
+		]]>
+	</select>
 </mapper>

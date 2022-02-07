@@ -6,7 +6,7 @@
 	<insert id="insert" parameterType = "uservo" >
 		<![CDATA[
 			insert into blog
-			 values ('title', '/images/20221602322119.JPG', #{id})
+			 values ('title', '/images/2021027543255.png', #{id})
 		]]>
 	</insert>
 	
