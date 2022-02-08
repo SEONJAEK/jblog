@@ -1,6 +1,7 @@
 package com.poscoict.jblog.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -57,13 +58,28 @@ public class BlogController {
 			if(pathNo2.isPresent()) {
 				categoryNo = pathNo1.get();
 				postNo = pathNo2.get();
+				PostVo postvo = postService.selectPostByPostNo(postNo);
+				model.addAttribute("postVo", postvo);
+				List<PostVo> plist = postService.selectPostByCategory(categoryNo);
+				model.addAttribute("plist", plist);
+				
 			//1만 존재한다면
 			}else if(pathNo1.isPresent()) {
 				categoryNo = pathNo1.get();
+				List<PostVo> plist = postService.selectPostByCategory(categoryNo);
+				model.addAttribute("plist", plist);
+				PostVo postvo = postService.selectPostRecently(categoryNo);
+				model.addAttribute("postVo", postvo);
+				
+			}else {
+				categoryNo = postService.recentCategoryNo();
+				PostVo postvo = postService.selectPostRecently(categoryNo);
+				model.addAttribute("postVo", postvo);
+				List<PostVo> plist = postService.selectPostByCategory(categoryNo);
+				model.addAttribute("plist", plist);
+				
 			}
-			servletContext.setAttribute("blogvo", blogService.getInfo(id));
-			BlogVo blogvo = blogService.getInfo(id);
-			model.addAttribute("blogVo", blogVo);
+			servletContext.setAttribute("blog", blogService.getInfo(id));
 			Map<String, Object> map = categoryService.select(id);
 			model.addAttribute("map", map);
 			return "blog/blog-main";

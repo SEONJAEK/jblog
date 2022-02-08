@@ -18,7 +18,9 @@
 	
 	<select id="findById" parameterType = "String" resultType="blogVo">
 		<![CDATA[
-			select title, logo, user_id from blog where user_id = #{id}
+			select title, logo, user_id as userId from blog where user_id = #{id}
 		]]>
 	</select>
+	
+	
 </mapper>
