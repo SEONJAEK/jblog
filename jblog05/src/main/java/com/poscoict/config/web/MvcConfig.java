@@ -23,7 +23,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		return viewResolver;
 	}
 	
-	//서블릿 컨테이너(tomcat)의 DefaultServlet 위임
+	//서블릿 컨테이너(tomcat)의 DefaultServlet 위임// 이건 jblog06이 되면 자동으로 spring boot application이 해줌
 	//DefaultServlet Handler
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
