@@ -34,7 +34,7 @@ public class UserController {
 //			}
 			
 			//@ModelAttribute 사용시, 의미는 @Valid의 UserVo의 소문자 userVo로 만들어준것
-			//model.addAttribute("userVo", vo);
+			model.addAttribute("userVo", vo);
 			model.addAllAttributes(result.getModel());
 			return "user/join";
 		}

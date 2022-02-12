@@ -49,7 +49,7 @@ spring:
       #hikari dbcp 히카리라는 이름으로 달려있음   initialSize->minimum-idle, maxActive->maximum-pool-size
       hikari:
          minimum-idle: 10
-         maximum-pool-size: 20
+         maximum-pool-size: 30
 ---
 # production profile: spring boot configuration
 spring:
@@ -67,7 +67,7 @@ spring:
       #hikari dbcp 히카리라는 이름으로 달려있음   initialSize->minimum-idle, maxActive->maximum-pool-size
       hikari:
          minimum-idle: 10
-         maximum-pool-size: 20
+         maximum-pool-size: 30
 ---
 
 ---
