@@ -36,6 +36,7 @@ public class CategoryService {
 	public boolean deleteCategory(Long no) {
 		return categoryRepository.deleteCategory(no) == 1;
 	}
+	
 
 	
 	

@@ -1,6 +1,6 @@
 package com.poscoict.jblog.controller;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -54,31 +54,48 @@ public class BlogController {
 			Long categoryNo = 0L;
 			Long postNo = 0L;
 			
+			List<PostVo> plist = new ArrayList<PostVo>();
+			PostVo postvo=null;
+			
 			//2가 있다라는 이야기는 1도 있다는 이야기
 			if(pathNo2.isPresent()) {
+				System.out.println("실행중???");
 				categoryNo = pathNo1.get();
 				postNo = pathNo2.get();
-				PostVo postvo = postService.selectPostByPostNo(postNo);
-				model.addAttribute("postVo", postvo);
-				List<PostVo> plist = postService.selectPostByCategory(categoryNo);
-				model.addAttribute("plist", plist);
+				postvo = postService.selectPostByPostNo(postNo);
+				plist = postService.selectPostByCategory(categoryNo);		
 				
 			//1만 존재한다면
-			}else if(pathNo1.isPresent()) {
+			}
+			
+			else if(pathNo1.isPresent()) {
+				System.out.println("실행중???");
 				categoryNo = pathNo1.get();
-				List<PostVo> plist = postService.selectPostByCategory(categoryNo);
-				model.addAttribute("plist", plist);
-				PostVo postvo = postService.selectPostRecently(categoryNo);
-				model.addAttribute("postVo", postvo);
-				
-			}else {
-				categoryNo = postService.recentCategoryNo();
-				PostVo postvo = postService.selectPostRecently(categoryNo);
-				model.addAttribute("postVo", postvo);
-				List<PostVo> plist = postService.selectPostByCategory(categoryNo);
-				model.addAttribute("plist", plist);
+				plist = postService.selectPostByCategory(categoryNo);
+				if(postNo==0L) {
+					if(!plist.isEmpty()) {
+						postNo=plist.get(0).getNo();
+					}
+				}
+				postvo = postService.selectPostByPostNo(postNo);
 				
 			}
+			else {
+				Map<String, Object> map = categoryService.select(id); // 카테고리 리스트, 카테고리 글 개수 리스트 받아오기
+				List<CategoryVo> categoryList = (List<CategoryVo>) map.get("clist");// 카테고리 리스트(맨 처음 화면이 나올 때)
+				categoryNo=categoryList.get(0).getNo();		
+				plist = postService.selectPostByCategory(categoryNo);
+				if(postNo==0L) {
+					if(!plist.isEmpty()) {
+						postNo=plist.get(0).getNo();
+					}
+				}
+				postvo = postService.selectPostRecently(postNo);
+				
+			}
+			
+			model.addAttribute("postVo", postvo);
+			model.addAttribute("plist", plist);
 			servletContext.setAttribute("blog", blogService.getInfo(id));
 			Map<String, Object> map = categoryService.select(id);
 			model.addAttribute("map", map);
