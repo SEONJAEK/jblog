@@ -10,9 +10,18 @@
 		]]>
 	</insert>
 	
+	
+	<insert id="insertCategory" parameterType="uservo">
+		<![CDATA[
+		insert into category values(null, '미분류', '기본카테고리입니다.', #{id})
+		]]>
+	</insert>
+	
+	
+	
 	<select id="findCategoryAll" parameterType = "String" resultType="categoryvo">
 		<![CDATA[
-			select no, name, description from category where blog_id = #{_parameter} order by no asc 
+			select no, name, description from category where blog_id = #{_parameter} order by no desc
 		]]>
 	</select>
 	

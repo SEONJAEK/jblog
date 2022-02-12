@@ -5,7 +5,7 @@ spring:
 # common: spring boot configuration
 spring: 
 
-   # devtools - live reload
+   # devtools - live reload  # css jsp정적파일 서버리스타트 안하고 새로고침만해도 반영하게 해주는 것 
    livereload:
       enabled: true
 

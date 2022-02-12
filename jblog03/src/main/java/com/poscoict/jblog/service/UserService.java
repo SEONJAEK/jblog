@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poscoict.jblog.repository.BlogRepository;
+import com.poscoict.jblog.repository.CategoryRepository;
 import com.poscoict.jblog.repository.UserRepository;
 import com.poscoict.jblog.vo.BlogVo;
 import com.poscoict.jblog.vo.UserVo;
@@ -20,6 +21,9 @@ public class UserService {
 	private BlogRepository blogRepository;
 	
 	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Autowired
 	private ServletContext servletContext;
 
 	public void join(UserVo userVo) {
@@ -28,6 +32,7 @@ public class UserService {
 		if (result) {
 			blogRepository.insert(userVo);
 			BlogVo blogvo = blogRepository.findById(id);
+			categoryRepository.insertCategory(userVo);
 			servletContext.setAttribute("blog", blogvo);
 		}
 	}
