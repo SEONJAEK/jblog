@@ -27,11 +27,5 @@
 		select title, contents from post where category_no= #{categoryNo} order by reg_date desc limit 1;
 	]]>
 	</select>
-	
-	<select id="recentCategoryNo" resultType="Long">
-	<![CDATA[
-		select category_no from post where (select max(no) from post) = no;
-	]]>
-	</select>
-	
+
 </mapper>
